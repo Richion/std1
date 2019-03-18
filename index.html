@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>Let's Chat</title>
+	</head>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script>
+		var socket = io();
+		$(function(){
+			$('form').submit(function(e){
+				e.preventDefault();
+				socket.emit("chat",$('#o').val());
+				$('#o').val();
+				return false;
+			});
+			socket.on("chat",function(msg){
+				$('#message').append($('<li>').text(msg))		
+			
+			});
+			
+		
+		
+		
+		})
+		
+		
+		
+	</script>
+	
+		<script>
+            window.onload=function(){
+                if(document.documentElement.scrollHeight <= document.documentElement.clientHeight) {
+                    bodyTag = document.getElementsByTagName('body')[0];
+                    bodyTag.style.height = document.documentElement.clientWidth / screen.width * screen.height + 'px';
+                }
+                setTimeout(function() {
+                    window.scrollTo(0, 1)
+                }, 0);
+            };
+        </script>
+
+	<body>
+		<div class="w3-container">
+			<h1>Let's Chat!!</h1>
+			
+			<ul class="w3-ul w3-card-4" id ="message">
+				
+				
+			</ul>
+		</div>
+		<form>
+			<input id = "o" class="w3-input" type="text"><button class="w3-button w3-black" style="width:100%">送出</button>
+		</form>
+	
+	</body>
+</html>
